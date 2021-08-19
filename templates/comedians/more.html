@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="landing-page text-center">
+   <img class="banner-img" src="{% static 'images/capeai-logo.png' %}" alt="">
+   <div class="container pt-5">
+      <div class="row">
+         <div class="col-12 pt-5">
+
+            <h5 class="pb-2">Random joke:</h5>
+            <h4 class="pb-2">{{ joke_setup }}</h4>
+            <h4 class="pb-3">{{ joke_delivery }}</h4>
+
+            <p style="color: #70c168;">
+               Next joke<a href="{% url 'more' %}"><span class="arrow"></span></a>
+            </p>
+
+            <img src="{% static 'images/comedy.gif' %}" alt="" style="width: 40%;">
+
+            <form action="{% url 'logout' %}" method="POST" id="logout" class="pt-3 pb-5">
+               {% csrf_token %}
+               <a href="#" onclick="document.getElementById('logout').submit();"
+                  >Logout</a
+               >
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}

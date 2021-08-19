@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <!-- Bootstrap CSS -->
+      <link
+         rel="stylesheet"
+         type="text/css"
+         href="{% static 'css/bootstrap.css' %}"
+      />
+      <!-- Main CSS -->
+      <link
+         rel="stylesheet"
+         type="text/css"
+         href="{% static 'css/main.css' %}?{% now 'U' %}"
+      />
+
+      <title>Cape AI Project</title>
+   </head>
+   <body>
+      
+      <!-- PAGE CONTENT -->
+      {% block content %} 
+      {% endblock %}
+
+      <!-- jQuery -->
+      <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+      <!-- Bootstrap JS -->
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <!-- Tilt JS -->
+      <script src="{% static 'js/tilt.jquery.min.js' %}"></script>
+      <script>
+         $(".js-tilt").tilt({
+            scale: 1.1,
+         });
+      </script>
+      <!-- Main JS -->
+      <script src="{% static 'js/main.js' %}"></script>
+
+   </body>
+</html>

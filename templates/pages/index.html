@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="landing-page text-center">
+   <img class="banner-img" src="{% static 'images/capeai-logo.png' %}" alt="" />
+   <div class="container">
+      <div class="row">
+         <div class="col-12">
+
+            <!-- Message Alert -->
+            <div class="alert-area">
+               {% include 'partials/_messages.html' %}
+            </div>
+
+            {% if user.is_authenticated %}
+
+               <h4 class="pb-3">Hi, {{ user.username | title }}!</h4>
+
+               <form
+                  class="form-width m-auto text-start"
+                  action="{% url 'about' %}"
+                  method="POST"
+                  name="comedy"
+               >
+                  {% csrf_token %}
+                  <input
+                     type="text"
+                     name="username"
+                     class="form-info"
+                     value="{{ user.username }}"
+                     hidden
+                  />
+                  <div class="form-group">
+                     <p>Who's your inspiration:</p>
+                     <input
+                        type="text"
+                        name="inspiration"
+                        class="form-info"
+                        required=""
+                     />
+                  </div>
+                  <div class="form-group mb-2">
+                     <p>Your joke of the day:</p>
+                     <!-- <textarea
+                        name="joke_of_the_day"
+                        id=""
+                        cols="30"
+                        rows="10"
+                        form="comedy"
+                        required
+                     ></textarea> -->
+                     <input
+                        type="text"
+                        name="joke_of_the_day"
+                        class="form-info"
+                        required=""
+                     />
+                  </div>
+
+                  <input type="submit" value="Submit" class="btn mt-5" />
+               </form>
+
+               <form action="{% url 'logout' %}" method="POST" id="logout" class="pb-5">
+                  {% csrf_token %}
+                  <a href="#" onclick="document.getElementById('logout').submit();"
+                     >Logout</a
+                  >
+               </form>
+
+            {% else %}
+
+               <h4 class="pb-3">Hi there,</h4>
+               <h5>
+                  Please <a href="{% url 'login' %}">login</a> or
+                  <a href="{% url 'register' %}">register</a> first.
+               </h5>
+
+            {% endif %}
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock %}

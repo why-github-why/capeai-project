@@ -1,0 +1,52 @@
+docker-compose run django django-admin startproject core .
+
+access bash
+====================
+
+docker exec -it django bash
+
+
+start/stop container
+====================
+
+docker-compose up / down
+
+
+Postgres
+====================
+
+# access database
+docker exec -it pgdb psql -U postgres
+\c <database_name>
+\d
+\d+ <table_name>
+\q
+
+# access shell
+docker exec -it pgdb sh
+
+# data location
+cd /var/lib/postgresql/data/
+
+# backup database 
+# (U = User, W = force, F = file format, t = tar)
+pg_dump -U postgres -W -F t postgres > backup.tar
+
+==========
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'p05tgr35.',
+        'HOST': 'pgdb',
+        'PORT': 5432,
+    }
+}
+
+
+Docker volume
+====================
+
+docker volume ls
+docker volume inspect capeaiproject_pgdata
